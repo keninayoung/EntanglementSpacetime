@@ -1,0 +1,15 @@
+# Ignore output files
+spacetime_outputs/*
+# Ignore Python cache and virtual environments
+__pycache__/
+*.pyc
+venv/
+.venv/
+# Ignore local LaTeX files
+*.aux
+*.bbl
+*.blg
+*.log
+*.out
+*.toc
+*.pdf
