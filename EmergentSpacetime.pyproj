@@ -48,6 +48,7 @@
     <Content Include="example_outputs\entanglement_graph_t2.html" />
     <Content Include="example_outputs\entanglement_graph_t3.html" />
     <Content Include="example_outputs\entanglement_graph_t4.html" />
+    <Content Include="example_outputs\entanglement_graph_t4_img.png" />
     <Content Include="example_outputs\entropy.csv" />
     <Content Include="example_outputs\hawking_radiation.csv" />
     <Content Include="LICENSE.txt" />
