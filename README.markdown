@@ -16,7 +16,7 @@ For methodology and results, see the publication:
 
 ### Prerequisites
 - Python 3.9 or higher
-- CUDA 12.6 (for GPU support)
+- CUDA 12.x (for GPU support)
 - Minimum 16 GB RAM for 4x4 grid simulations
 - Linux (for multi-GPU parallelization; Windows supports single-GPU or CPU)
 
@@ -85,7 +85,9 @@ Example output files from a 3x3 simulation (as reported in the paper) are provid
   ```
   Reported in the paper: MI varies from 0.39 to 0.63, peaking at 0.63 in step 2, indicating unitary evolution.
 
-- **Entanglement Graph (`entanglement_graph_t2.html`)**: Interactive 3D visualization of the entanglement graph at time step 2 (where the Page curve peaks). Nodes represent quantum sites, and edges are weighted by mutual information \( I(i:j) \), with \( d(i,j) \sim -\log I(i:j) \). Open this file in a web browser to explore the emergent spacetime geometry.
+- **Entanglement Graph (`entanglement_graph_t2.html`)**: Interactive 3D visualization of the entanglement graph at time step 2 (where the Page curve peaks). Nodes represent quantum sites, and edges are weighted by mutual information \( I(i:j) \), with \( d(i,j) \sim -\log I(i:j) \). Open this file in a web browser to explore the emergent spacetime geometry. An example of the entanglement graph at time step 4 is below:
+
+![entanglement_graph_t4_img](https://github.com/user-attachments/assets/7323cafa-2c46-40f6-9bad-8d28c20ed0d0)
 
 Users can run the simulation themselves to generate the full set of outputs for different parameters (e.g., 4x4 grid).
 
