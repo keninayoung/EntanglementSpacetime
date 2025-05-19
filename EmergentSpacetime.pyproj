@@ -40,6 +40,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include=".gitignore" />
+    <Content Include="docs\entanglement-drive-spacetime.pdf" />
     <Content Include="example_outputs\curvature_evolution.csv" />
     <Content Include="example_outputs\einstein_tensor.csv" />
     <Content Include="example_outputs\entanglement_graph_t0.html" />

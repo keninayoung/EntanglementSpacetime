@@ -12,4 +12,5 @@ venv/
 *.log
 *.out
 *.toc
-*.pdf
+/.vs
+/env
