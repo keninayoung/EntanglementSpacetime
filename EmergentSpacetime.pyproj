@@ -32,7 +32,7 @@
     <Compile Include="orbit_simulation.py" />
     <Compile Include="visualization.py" />
     <Compile Include="__init__.py" />
-    <Compile Include="entaglement_spacetime_evolution.py" />
+    <Compile Include="entanglement_spacetime_evolution.py" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="docs\" />
