@@ -5,7 +5,7 @@
     <ProjectGuid>bfa55038-e81c-48f9-b970-d1f0bc37c3e5</ProjectGuid>
     <ProjectHome>
     </ProjectHome>
-    <StartupFile>entaglement_spacetime_evolution.py</StartupFile>
+    <StartupFile>orbit_simulation.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -29,6 +29,7 @@
     <Compile Include="entropy.py" />
     <Compile Include="graph_builder.py" />
     <Compile Include="hawking_radiation.py" />
+    <Compile Include="orbit_simulation.py" />
     <Compile Include="visualization.py" />
     <Compile Include="__init__.py" />
     <Compile Include="entaglement_spacetime_evolution.py" />
