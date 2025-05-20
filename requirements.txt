@@ -20,4 +20,4 @@ nevergrad>=1.0.0  # Optional hyper-optimizer
 # GPU support (cupy for single-GPU, dask for parallelization)
 cupy-cuda12x  # Matches CUDA 12.6
 dask>=2025.4.0
-dask-cuda>=24.0.0  # For multi-GPU on Linux; version may need adjustment
+dask-cuda  # For multi-GPU on Linux; version may need adjustment
