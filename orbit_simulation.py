@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 from matplotlib import animation
 from mpl_toolkits.mplot3d import Axes3D
 
+
 # Step 1: Print initial message to indicate the simulation has started.
 print("Starting solar system simulation...")
 
