@@ -9,15 +9,16 @@ The code supports:
 - Multi-GPU parallelization on Linux using Dask-CUDA.
 - CPU parallelization on both platforms.
 
-For methodology and results, see the publication:  
-"Entanglement-Driven Emergent Spacetime with Time-Evolved Tensor Networks" by Kenneth Young, PhD (2025).
+For methodology and results, see the publication:  ["Entanglement-Driven Emergent Spacetime with Time-Evolved Tensor Networks: Applications to Quantum and Classical Systems"](docs/entanglement-drive-spacetime.pdf) by Kenneth Young, PhD (2025).
+
+![Quantum derived orbits](example_outputs/animated_quantum_earth_orbit.gif)
 
 ## Installation
 
 ### Prerequisites
 - Python 3.9 or higher
 - CUDA 12.x (for GPU support)
-- Minimum 16 GB RAM for 4x4 grid simulations
+- Minimum 32 GB RAM for 4x4 grid simulations
 - Linux (for multi-GPU parallelization; Windows supports single-GPU or CPU)
 
 ### Steps
