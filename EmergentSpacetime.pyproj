@@ -36,12 +36,15 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="docs\" />
+    <Folder Include="docs\archive_docs\" />
     <Folder Include="example_outputs\" />
     <Folder Include="spacetime_outputs\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include=".gitattributes" />
     <Content Include=".gitignore" />
+    <Content Include="docs\archive_docs\entanglement-drive-spacetime-3x3.pdf" />
+    <Content Include="docs\archive_docs\entanglement-drive-spacetime-noorbits.pdf" />
     <Content Include="docs\entanglement-drive-spacetime.pdf" />
     <Content Include="example_outputs\animated_quantum_earth_orbit.gif" />
     <Content Include="example_outputs\curvature_evolution.csv" />

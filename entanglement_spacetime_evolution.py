@@ -104,10 +104,10 @@ if not is_windows:
         print("Dask-CUDA is available on Linux. Multi-GPU acceleration can be used if enabled.")
         dask_cuda_available = True
     except ImportError:
-        print("Dask-CUDA is not available. Falling back to single-GPU or CPU.")
+        print("Dask-CUDA is not available. Falling back to single-GPU, Multi-CPU, or single-CPU.")
         dask_cuda_available = False
 else:
-    print("Dask-CUDA is not supported on Windows. Using single-GPU or CPU.")
+    print("Dask-CUDA is not supported on Windows. Using single-GPU, Multi-CPU, or single-CPU.")
     dask_cuda_available = False
 
 # Import project-specific modules for simulation tasks
@@ -119,6 +119,9 @@ from hawking_radiation import compute_hawking_radiation  # For computing mutual 
 from visualization import save_entanglement_graph  # For saving interactive visualizations
 
 def run_simulation(Lx=3, Ly=3, bond_dim=2, time_steps=5, dt=0.1, output_dir="spacetime_outputs", approximate=False, use_gpu=True):
+    # Default cores to 1
+    num_cores = 1
+
     # Calculate total number of quantum sites in the lattice (Lx * Ly)
     n_sites = Lx * Ly
 
@@ -189,6 +192,10 @@ def run_simulation(Lx=3, Ly=3, bond_dim=2, time_steps=5, dt=0.1, output_dir="spa
     # If multi-GPU setup succeeded, confirm the computation mode
     if client is not None:
         computation_mode = "multi-gpu"
+
+
+    # Dispaly computing mode
+    print(f"Computation mode: {computation_mode}")
 
     # Check memory requirements to determine if approximate contraction is needed
     if approximate or available_memory < required_memory * 1.5 or n_sites >= 16:
@@ -361,9 +368,23 @@ def run_simulation(Lx=3, Ly=3, bond_dim=2, time_steps=5, dt=0.1, output_dir="spa
             if use_gpu and cupy_available:
                 # If GPU computation fails, fall back to CPU
                 print(f"CuPy error: {e}. Falling back to CPU (NumPy).")
+
+                #Fall back to CPU
+                if num_cores > 1:
+                    # If multiple CPU cores are available, prefer multi-CPU parallelization
+                    use_gpu = False
+                    computation_mode = "multi-cpu"
+                    print("Falling back to multi-CPU parallel computation.")
+                else:
+                    # If only one CPU core is available, use single-CPU
+                    use_gpu = False
+                    computation_mode = "single-cpu"
+                    print("Falling back to single-CPU computation.")
+                # Print compute node
+                print(f"Compute mode: {computation_mode}")
+
                 return compute_mi(peps, n_sites, approximate, use_gpu=False)
-            else:
-                raise e
+            
         finally:
             # Clean up Dask client and cluster if they were initialized
             if client is not None:

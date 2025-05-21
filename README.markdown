@@ -107,7 +107,7 @@ Users can run the simulation themselves to generate the full set of outputs for 
 
 ## Citation
 If you use this code in your research, please cite:  
-Kenneth Young, "Entanglement-Driven Emergent Spacetime with Time-Evolved Tensor Networks," 2025.
+Kenneth Young, PhD "Entanglement-Driven Emergent Spacetime with Time-Evolved Tensor Networks: Applications to Quantum and Classical Systems," 2025.
 
 ## License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
