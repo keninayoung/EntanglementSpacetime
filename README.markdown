@@ -1,117 +1,203 @@
 # EntanglementSpacetime
 
+Author: Kenneth Young, PhD
+
 ## Overview
 
-This repository contains the code for the project "Entanglement-Driven Emergent Spacetime with Time-Evolved Tensor Networks" by Kenneth Young, PhD. The framework simulates the emergence of spacetime from quantum entanglement using a time-evolved Projected Entangled Pair States (PEPS) tensor network. It defines spacetime distances as \(d(i, j) \sim -\log I(i:j)\), where \(I(i:j)\) is the mutual information between quantum sites, computes discrete curvature, approximates the Einstein tensor, and analyzes holographic entropy and black hole dynamics.
+This repository contains code for the project "Entanglement-Driven Emergent Spacetime with Time-Evolved Tensor Networks". The framework simulates the emergence of spacetime from quantum entanglement using a time-evolved Projected Entangled Pair States (PEPS) tensor network.
+
+Core idea:
+- Define an information-theoretic distance between lattice sites,
+  `d(i,j) ~ -log I(i:j)`, where `I(i:j)` is the mutual information.
+- From this, compute discrete curvature, approximate an Einstein-like tensor, and
+  analyze holographic entropy and black-hole dynamics.
 
 The code supports:
 - Single-GPU execution on Windows and Linux.
 - Multi-GPU parallelization on Linux using Dask-CUDA.
-- CPU parallelization on both platforms.
+- CPU-only mode on both platforms.
 
-For methodology and results, see the publication:  ["Entanglement-Driven Emergent Spacetime with Time-Evolved Tensor Networks: Applications to Quantum and Classical Systems"](docs/entanglement-drive-spacetime.pdf) by Kenneth Young, PhD (2025).
+For methodology and results, see:
+[Entanglement-Driven Emergent Spacetime with Time-Evolved Tensor Networks: Applications to Quantum and Classical Systems](docs/entanglement-drive-spacetime.pdf)
 
-![Quantum derived orbits](example_outputs/animated_quantum_earth_orbit.gif)
+## Visual Demos
+
+These visualizations are driven by the quantum outputs written to `spacetime_outputs/`:
+
+- **Quantum-derived orbits** (classical orbits whose central pull is modulated by entropy and Hawking-like mutual information):
+
+  ![Quantum derived orbits](example_outputs/animated_quantum_earth_orbit.gif)
+
+- **Black-hole animation** (stars accrete toward a black hole whose on-plot radius equals a mapped Schwarzschild radius; radius grows smoothly and monotonically based on quantum signals):
+
+  ![Black hole entanglement animation](example_outputs/black_hole_entanglement_2d.gif)
+
+## How the quantum outputs drive the visuals
+
+After you run the PEPS evolution, the following CSVs appear in `spacetime_outputs/`:
+
+- `entropy.csv`: entanglement entropy over time.
+- `hawking_radiation.csv`: mutual information across a chosen horizon (Page-curve-like).
+- `curvature_lattice.csv` (optional): a 3x3 curvature field per step for simple spatial modulation.
+
+The visualization scripts use these series as follows:
+
+- **Solar system demo (`solar_system_entanglement.py`)**:
+  - Global pull `k(t)` is modulated by a normalized blend of `dEntropy/dt` and Hawking MI.
+  - Optional 3x3 curvature adds local sector multipliers.
+  - Orbits are integrated with Velocity Verlet; this is a classical integrator driven by quantum-derived signals.
+
+- **Black-hole demo (`blackhole_simulation.py`)**:
+  - The on-plot black disk radius is set to a mapped Schwarzschild radius `r_s = 2 G M / c^2`.
+  - A one-time meter-to-plot mapping is computed using a reference mass and a target on-plot radius.
+  - The effective mass is scaled by a smoothed, cumulative, nonnegative driver from the quantum signals.
+    This guarantees small, monotonic growth (no shrinking artifacts).
 
 ## Installation
 
 ### Prerequisites
 - Python 3.9 or higher
-- CUDA 12.x (for GPU support)
-- Minimum 32 GB RAM for 4x4 grid simulations
-- Linux (for multi-GPU parallelization; Windows supports single-GPU or CPU)
+- CUDA 12.x for GPU support (optional)
+- For larger grids, 32 GB RAM or more is recommended
+- Linux for multi-GPU with Dask-CUDA; Windows supports single-GPU or CPU
 
 ### Steps
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/yourusername/EntanglementSpacetime.git
-   cd EntanglementSpacetime
-   ```
+1) Clone the repository:
+```bash
+git clone https://github.com/yourusername/EntanglementSpacetime.git
+cd EntanglementSpacetime
+```
 
-2. Create a virtual environment:
-   ```bash
-   python3 -m venv venv
-   source venv/bin/activate  # On Windows: venv\Scripts\activate
-   ```
+2) Create a virtual environment:
+```bash
+python -m venv venv
+# Windows:
+venv\Scripts\activate
+# Linux/macOS:
+source venv/bin/activate
+```
 
-3. Install dependencies:
-   ```bash
-   pip install -r requirements.txt
-   ```
-   Note: For multi-GPU support on Linux, ensure CUDA 12.6 and Dask-CUDA are installed. On Windows, multi-GPU is not supported; the code will fall back to single-GPU or CPU.
+3) Install dependencies:
+```bash
+pip install -r requirements.txt
+```
+
+Notes:
+- On Linux, install CUDA 12.6 and Dask-CUDA for multi-GPU.
+- On Windows, multi-GPU is not supported; the code will use single-GPU or CPU.
 
 ## Usage
 
-Run a simulation using the command-line interface. Example for a 3x3 grid with GPU support:
+### 1) Run the entanglement simulation (writes CSVs used by the demos)
+
+Example 3x3 run:
 ```bash
-python3 -m emergent_spacetime.cli --Lx 3 --Ly 3 --steps 5 --hamiltonian heisenberg --use_gpu True
+python entanglement_spacetime_evolution.py
 ```
 
-### Command-Line Arguments
-- `--Lx`: Lattice width (default: 3)
-- `--Ly`: Lattice height (default: 3)
-- `--steps`: Number of time steps (default: 5)
-- `--hamiltonian`: Hamiltonian type (default: "heisenberg")
-- `--use_gpu`: Enable GPU acceleration (default: True)
-- `--approximate`: Use approximate contraction for large grids (default: False)
+Or via CLI (if you use the CLI wrapper):
+```bash
+python -m emergent_spacetime.cli --Lx 3 --Ly 3 --steps 5 --hamiltonian heisenberg --use_gpu True
+```
 
-## Outputs
+**Key args:**
+- `--Lx`, `--Ly`: lattice dimensions (default 3x3)
+- `--steps`: time steps (default 5)
+- `--hamiltonian`: default "heisenberg"
+- `--use_gpu`: True or False
+- `--approximate`: enable approximate contraction for larger grids
 
-Results are saved in the `spacetime_outputs` directory:
-- `curvature_evolution.csv`: Discrete curvature over time steps.
-- `einstein_tensor.csv`: Einstein tensor approximation.
-- `entropy.csv`: Entanglement entropy over time.
-- `hawking_radiation.csv`: Mutual information across the horizon (Page curve).
-- `entanglement_graph_tX.html`: Interactive 3D visualizations for each time step \(t\).
+Outputs are written to `spacetime_outputs/`:
+- `curvature_evolution.csv`
+- `einstein_tensor.csv`
+- `entropy.csv`
+- `hawking_radiation.csv`
+- `curvature_lattice.csv` (if generated by your run)
+- `entanglement_graph_tX.html` for each step X
 
-### Example Outputs
-Example output files from a 3x3 simulation (as reported in the paper) are provided in the `example_outputs` directory to help users understand the simulation results:
+### 2) Generate the solar-system visualization (quantum-driven orbits)
+```bash
+python solar_system_entanglement.py --use_entanglement --use_spatial_curvature
+```
 
-- **Curvature Evolution (`curvature_evolution.csv`)**: Discrete curvature \( \kappa(i,j) \) between pairs of sites over 5 time steps.
-  ```
-  ,Step 0,Step 1,Step 2,Step 3,Step 4
-  0-1,-0.089448,...,...,...,...
-  0-2,...,...,...,...,...
-  ```
-  Reported in the paper: \( \kappa(0,1) = -0.089448 \) at step 0, indicating AdS-like negative curvature.
+**Useful flags:**
+- `--earth_a`, `--mars_a`: tweak semi-major axes without editing code.
+- `--trail_len`: length of comet-like trails.
+- `--n_steps`, `--dt`: integration and animation time base.
 
-- **Hawking Radiation (`hawking_radiation.csv`)**: Mutual information across the horizon (middle row of the lattice), resembling a Page curve.
-  ```
-  Step,MI Across Horizon
-  0,0.39
-  1,...
-  2,0.63
-  3,...
-  4,...
-  ```
-  Reported in the paper: MI varies from 0.39 to 0.63, peaking at 0.63 in step 2, indicating unitary evolution.
+**Artifacts:**
+- `spacetime_outputs/animated_quantum_earth_orbit.gif`
+- `spacetime_outputs/animated_quantum_earth_orbit.mp4` (if ffmpeg is available)
+- `spacetime_outputs/earth_entropy.png`
+- `spacetime_outputs/close_Earth_Venus.png`, `close_Earth_Mars.png`
 
-- **Entanglement Graph (`entanglement_graph_t2.html`)**: Interactive 3D visualization of the entanglement graph at time step 2 (where the Page curve peaks). Nodes represent quantum sites, and edges are weighted by mutual information \( I(i:j) \), with \( d(i,j) \sim -\log I(i:j) \). Open this file in a web browser to explore the emergent spacetime geometry. An example of the entanglement graph at time step 4 is below:
+### 3) Generate the black-hole visualization (smooth Schwarzschild growth)
+```bash
+python blackhole_simulation.py
+```
 
-![entanglement_graph_t4_img](https://github.com/user-attachments/assets/7323cafa-2c46-40f6-9bad-8d28c20ed0d0)
+**Behavior:**
+- The black disk is sized in data units to match a mapped Schwarzschild radius.
+- Growth is monotonic and small; tune in the CONFIG section:
+  - `BH_M_REF_SOLAR`, `BH_TARGET_RADIUS_FOR_REF`
+  - `BH_GROWTH_MAX` (overall increase cap)
+  - `BH_GROWTH_EMA_ALPHA` (smoother or more responsive)
+  - weights for the growth driver
 
-Users can run the simulation themselves to generate the full set of outputs for different parameters (e.g., 4x4 grid).
+**Artifact:**
+- `spacetime_outputs/black_hole_entanglement_2d.gif`
+
+## Example Outputs
+
+Example CSVs and HTML are included in `example_outputs/` to make it easy to preview results without running long jobs. For instance:
+
+- **Hawking Radiation (`hawking_radiation.csv`)**: a Page-curve-like MI across the horizon.
+- **Curvature Evolution (`curvature_evolution.csv`)**: discrete curvature between site pairs over steps.
+- **Entanglement Graphs**: a set of `entanglement_graph_tX.html` files that visualize the evolving MI-weighted graph.
 
 ## Project Structure
-- `emergent_spacetime_evolution.py`: Main simulation script.
-- `graph_builder.py`: Builds the entanglement graph.
-- `curvature.py`: Computes discrete curvature.
-- `einstein_tensor.py`: Approximates the Einstein tensor.
-- `entropy.py`: Computes entanglement entropy.
-- `hawking_radiation.py`: Analyzes black hole dynamics.
-- `visualization.py`: Generates interactive visualizations.
-- `spacetime_outputs/`: Directory for simulation outputs (empty in repository).
-- `example_outputs/`: Example output files from a 3x3 simulation.
-- `requirements.txt`: List of dependencies.
-- `README.md`: Project documentation.
-- `LICENSE`: MIT License.
+
+- `entanglement_spacetime_evolution.py`  Main PEPS simulation and CSV writers.
+- `graph_builder.py`                     Builds the MI graph from PEPS.
+- `curvature.py`                         Discrete curvature computation.
+- `einstein_tensor.py`                   Einstein-like tensor approximation.
+- `entropy.py`                           Entropy helpers.
+- `hawking_radiation.py`                 Horizon MI and related metrics.
+- `visualization.py`                     3D graph visualizations.
+- `solar_system_entanglement.py`         Quantum-driven orbital demo (GIF/MP4).
+- `blackhole_simulation.py`              Black-hole demo with mapped Schwarzschild radius.
+- `spacetime_outputs/`                   Output directory (created at runtime).
+- `example_outputs/`                     Example data and GIFs for README.
+- `requirements.txt`                     Dependencies.
+- `README.md`                            Project documentation.
+- `LICENSE`                              MIT License.
+
+## Reproducing the figures used in the README
+
+1) Run the PEPS simulation to populate `spacetime_outputs/`.
+2) Run `solar_system_entanglement.py` and `blackhole_simulation.py`.
+3) Copy the generated GIFs into `example_outputs/`:
+```bash
+cp spacetime_outputs/animated_quantum_earth_orbit.gif example_outputs/
+cp spacetime_outputs/black_hole_entanglement_2d.gif example_outputs/
+```
+4) Commit the updated `example_outputs` and this `README.md`.
+
+## Troubleshooting
+
+- **Black-hole radius looks jumpy or too large**: lower `BH_GROWTH_MAX`, reduce growth weights, or increase `BH_GROWTH_EMA_ALPHA` for heavier smoothing.
+- **Orbits too close**: increase `--earth_a` and `--mars_a`, keep safe phase spacing, or lower inner eccentricities. The script prints min Earth-Venus and Earth-Mars separations.
+- **ffmpeg not found**: MP4 export is skipped; the GIF is still saved.
 
 ## Citation
+
 If you use this code in your research, please cite:  
-Kenneth Young, PhD "Entanglement-Driven Emergent Spacetime with Time-Evolved Tensor Networks: Applications to Quantum and Classical Systems," 2025.
+Kenneth Young, PhD, "Entanglement-Driven Emergent Spacetime with Time-Evolved Tensor Networks: Applications to Quantum and Classical Systems," 2025.
 
 ## License
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+MIT License. See [LICENSE](LICENSE).
 
 ## Contact
-For questions or contributions, please open an issue on GitHub or contact the author directly.
+
+Open an issue or reach out directly to the author.
