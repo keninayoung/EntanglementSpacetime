@@ -5,7 +5,7 @@
     <ProjectGuid>bfa55038-e81c-48f9-b970-d1f0bc37c3e5</ProjectGuid>
     <ProjectHome>
     </ProjectHome>
-    <StartupFile>entanglement_spacetime_evolution.py</StartupFile>
+    <StartupFile>blackhole_simulation.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -23,6 +23,7 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="blackhole_simulation.py" />
     <Compile Include="cli.py" />
     <Compile Include="curvature.py" />
     <Compile Include="einstein_tensor.py" />
@@ -30,6 +31,7 @@
     <Compile Include="graph_builder.py" />
     <Compile Include="hawking_radiation.py" />
     <Compile Include="orbit_simulation.py" />
+    <Compile Include="solar_system_entanglement.py" />
     <Compile Include="visualization.py" />
     <Compile Include="__init__.py" />
     <Compile Include="entanglement_spacetime_evolution.py" />
@@ -38,6 +40,7 @@
     <Folder Include="docs\" />
     <Folder Include="docs\archive_docs\" />
     <Folder Include="example_outputs\" />
+    <Folder Include="images\" />
     <Folder Include="spacetime_outputs\" />
   </ItemGroup>
   <ItemGroup>
@@ -57,6 +60,7 @@
     <Content Include="example_outputs\entanglement_graph_t4_img.png" />
     <Content Include="example_outputs\entropy.csv" />
     <Content Include="example_outputs\hawking_radiation.csv" />
+    <Content Include="images\milkyway.jpg" />
     <Content Include="LICENSE.txt" />
     <Content Include="README.markdown" />
     <Content Include="requirements.txt" />

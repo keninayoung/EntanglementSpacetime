@@ -10,6 +10,8 @@ plotly>=5.10.0
 scikit-learn>=1.1.0
 matplotlib>=3.10.3
 numexpr>=2.10.0
+pyvis>=0.3.2
+imageio==2.37.0
 
 # Tensor contraction optimization
 cotengra>=0.2.0
