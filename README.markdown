@@ -1,11 +1,11 @@
-# EntanglementSpacetime
+# Entanglement Spacetime
 
 Author: Kenneth Young, PhD
 
 ## Overview
 This repository contains code for the project "Entanglement-Driven Emergent Spacetime with Time-Evolved Tensor Networks". 
 The framework simulates the emergence of spacetime from quantum entanglement using a time-evolved Projected Entangled Pair States (PEPS) tensor network.
-A rigorous 13-stage validation pipeline (R1–R13p) confirms EDG's consistency with GR in weak
+A rigorous 13-stage validation pipeline (R1â€“R13p) confirms EDG's consistency with GR in weak
 fields-including solar-system tests, light bending, Shapiro delay, and Cassini constraints-while
 imposing new bounds from Event Horizon Telescope (EHT) ring sizes and
 LIGO gravitational-wave (GW) phasing. Evolving 3D entanglement graphs and simulations
@@ -25,19 +25,22 @@ The code supports:
 - CPU-only mode on both platforms.
 
 For methodology and results, see:
-[Entanglement-Driven Emergent Spacetime with Time-Evolved Tensor Networks: Applications to Quantum and Classical Systems](docs/entanglement-drive-spacetime.pdf)
+
+1. [Entanglement-Driven Gravity: Emergent Spacetime from Quantum Correlations and Empirical Constraints](docs/edg-emergent_spacetime.pdf)
+2. [Entanglement-Driven Emergent Spacetime with Time-Evolved Tensor Networks: Applications to Quantum and Classical Systems](docs/entanglement-drive-spacetime.pdf)
 
 ## EDG Validation Pipeline (R1-R13p)
 
-In addition to simulations, this repository provides a **reproducible validation pipeline** for Entanglement-Driven Gravity (EDG). The stages R1–R13p cover:
+In addition to simulations, this repository provides a **reproducible validation pipeline** for Entanglement-Driven Gravity (EDG). The stages R1â€“R13p cover:
 
-- **R1–R6**: Newtonian sanity checks, Bianchi identities, curvature scaling, and numerical convergence of perihelion precession.  
-- **R7–R12**: Post-Newtonian observables (light deflection, Shapiro delay, Cassini), PPN cross-checks, bootstrap uncertainty, and integrator consensus.  
+- **R1â€“R6**: Newtonian sanity checks, Bianchi identities, curvature scaling, and numerical convergence of perihelion precession.  
+- **R7â€“R12**: Post-Newtonian observables (light deflection, Shapiro delay, Cassini), PPN cross-checks, bootstrap uncertainty, and integrator consensus.  
 - **R13p**: Strong-field joint fit combining EHT photon-ring diameters and GW phasing to constrain \(\epsilon\) and \(L_q\).
 
 The pipeline generates the same CSVs/figures used in the paper (e.g., perihelion tables, PPN tables, ring-posterior plots), and the high-level 
-**validation flow diagram**.
 
+**Validation Flow Diagram**.
+![Validation Flow Diagram](docs/figs/validation_flow.png)
 
 ## Visual Demos
 
@@ -227,9 +230,12 @@ cp spacetime_outputs/black_hole_entanglement_2d.gif example_outputs/
 
 If you use this code in your research, please cite at least one of the following:  
  
- 1. Entanglement-Driven Gravity (EDG) paper    Kenneth G. Young II, PhD, "Entanglement-Driven Gravity: Emergent Spacetime from Quantum Correlations and Empirical Constraints," 2025.
+ 1. Entanglement-Driven Gravity (EDG) paper
+    Kenneth G. Young II, PhD, "Entanglement-Driven Gravity: Emergent Spacetime from Quantum Correlations and Empirical Constraints," 2025.
+    [Entanglement-Driven Gravity: Emergent Spacetime from Quantum Correlations and Empirical Constraints](docs/edg-emergent_spacetime.pdf)   
  2. Tensor-network paper (framework foundations)
     Kenneth Young, PhD, "Entanglement-Driven Emergent Spacetime with Time-Evolved Tensor Networks: Applications to Quantum and Classical Systems," 2025.
+    [Entanglement-Driven Emergent Spacetime with Time-Evolved Tensor Networks: Applications to Quantum and Classical Systems](docs/entanglement-drive-spacetime.pdf)
  3. Software / repository
     Kenneth G. Young II, PhD, "EntanglementSpacetime: EDG Validation Pipeline and Analysis Code," GitHub, 2025.
     URL: https://github.com/keninayoung/EntanglementSpacetime
@@ -261,3 +267,4 @@ SOFTWARE.
 ## Contact
 
 Open an issue or reach out directly to the author.
+
