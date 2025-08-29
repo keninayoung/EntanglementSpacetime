@@ -1,0 +1,135 @@
+# entanglement_validation/config.yaml
+
+paths:
+  
+  spacetime_outputs_dir: "spacetime_outputs"
+  out_dir: "entanglement_validation/validation_outputs"
+
+# R1: Newtonian sanity check (independent of MI outputs)
+orbits:
+  r0: 3.0
+  k0: 100.0
+  dt_list: [0.05, 0.025, 0.0125]
+  periods: 100
+  mercury:
+    r0: 1.0
+    e: 0.2
+    k0: 100.0
+    dt: 2000.0 # R4 only uses dt and periods from here
+    periods: 120
+
+# R2: Bianchi-style residual norm
+bianchi:
+  norm: "l2"
+
+# R3: Scaling (optional). If you only have one run, we just point at the same folder.
+# You can add more entries later if you produce other runs/sizes.
+scaling:
+  size_patterns:
+    - { size: 1, pattern: "spacetime_outputs/*.csv" }
+
+# R4: Perihelion scan parameters (toy modulation)
+perihelion:
+  mode: "gr_like"   
+  autofit_epsilon: true
+  steps_per_orbit: 40000    # try 20000 to 40000
+  epsilon: 1.0e-7           # only used if autofit_epsilon is false
+  amplitudes: [0.0]         # ignored in gr_like mode
+  eps_small1: 1.0e-4
+  eps_small2: 2.0e-4
+  max_iters: 4               # 3–6 is fine
+  tol_rel: 5.0e-3            # target relative error (0.5%)
+
+# R5: Entropy and Hawking-like overview
+overview:
+  entropy_file: "spacetime_outputs/entropy.csv"
+  hawking_file: "spacetime_outputs/hawking_radiation.csv"
+
+graph:
+    Lx: 3
+    Ly: 3
+
+constants:
+  G: 6.67430e-11         # SI
+  M_sun: 1.98847e30      # kg
+  c: 2.99792458e8        # m/s
+  a_mercury: 5.79e10     # semi-major axis (m)
+  e_mercury: 0.206       # eccentricity
+
+
+r6:
+  planets: ["Mercury", "Venus", "Earth"]
+  integrators: ["rk4"]
+  steps_per_orbit_list: [96000, 192000, 384000]
+  steps_per_orbit_overrides:
+    Mercury: [192000, 384000, 768000]     # High-precision
+    Venus:   [100000, 200000, 300000]     # lighter than Mercury
+    Earth:   [80000, 160000, 320000]      # lighter than Venus
+  periods: 120
+  use_perihelia_from: 10
+  use_perihelia_to: 110
+  epsilon: 1.0
+  refine:
+    enabled: false
+    target_rel_err: 0.02
+    max_levels: 2
+    refine_factor: 2
+  constants:
+    G: 6.67430e-11
+    M_sun: 1.98847e30
+    c: 2.99792458e8
+  constants_planets:
+    Mercury: { a: 5.79e10, e: 0.206 }
+    Venus:   { a: 1.082e11, e: 0.007 }
+    Earth:   { a: 1.496e11, e: 0.0167 }
+  max_total_steps: 5000000   # hard cap on steps per job; 0 or omit = no cap
+  store_stride: 2            # store every Nth sample; 1 = store all
+
+
+
+r7:
+  planets: [Mercury, Venus, Earth]
+  integrators: ["vv", "rk4"]       # or ["vv"] 
+  periods: 60
+  steps_per_orbit_list: [96000, 192000, 384000]
+  steps_per_orbit_overrides:
+    Mercury: [192000, 384000, 768000]
+  epsilon_mode: from_r6      # fixed | from_r6
+  epsilon_fixed:
+    Mercury: 1.0
+    Venus: 1.0
+    Earth: 1.0
+  epsilon_base: 1.0
+  constants:
+    G: 6.67430e-11
+    M_sun: 1.98847e30
+    c: 2.99792458e8
+  constants_planets:
+    Mercury: { a: 5.79e10, e: 0.206 }
+    Venus:   { a: 1.082e11, e: 0.0067 }
+    Earth:   { a: 1.496e11, e: 0.0167 }
+
+r8:
+  r6_summary_file: validation_outputs/R12_eps_1.000000000/R6_perihelion_summary_eps_1.000000000.csv
+
+
+edg_demo:
+  curvature_file: "spacetime_outputs/curvature_lattice.csv"
+  step0_column: "Step 0"
+  xi_mode: "mean_abs"
+  planets: ["Mercury", "Venus", "Earth"]
+  epsilon_calibrated_mercury: 9.253238e-01
+  steps_per_orbit: 40000
+  periods: 120
+  constants:
+    G: 6.67430e-11
+    M_sun: 1.98847e30
+    c: 2.99792458e8
+  constants_planets:
+    Mercury: { a: 5.79e10,  e: 0.206 }
+    Venus:   { a: 1.082e11, e: 0.0068 }
+    Earth:   { a: 1.496e11, e: 0.0167 }
+
+
+
+

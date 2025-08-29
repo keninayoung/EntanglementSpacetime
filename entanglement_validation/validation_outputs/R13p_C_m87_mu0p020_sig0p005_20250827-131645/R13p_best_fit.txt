@@ -1,0 +1,4 @@
+epsilon_best = 1
+L_q_best    = 8.589802e+12
+chi2_best   = 1.867107e+04
+Lq_95_upper = 1.008126e+13

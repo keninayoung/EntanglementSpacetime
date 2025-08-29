@@ -1,0 +1,161 @@
+paths:
+  spacetime_outputs_dir: spacetime_outputs
+  out_dir: C:\Users\youngkg\source\repos\EntanglementSpacetime\entanglement_validation\validation_outputs\R12_eps_0.950000000
+orbits:
+  r0: 3.0
+  k0: 100.0
+  dt_list:
+  - 0.05
+  - 0.025
+  - 0.0125
+  periods: 100
+  mercury:
+    r0: 1.0
+    e: 0.2
+    k0: 100.0
+    dt: 2000.0
+    periods: 120
+bianchi:
+  norm: l2
+scaling:
+  size_patterns:
+  - size: 1
+    pattern: spacetime_outputs/*.csv
+perihelion:
+  mode: gr_like
+  autofit_epsilon: true
+  steps_per_orbit: 40000
+  epsilon: 1.0e-07
+  amplitudes:
+  - 0.0
+  eps_small1: 0.0001
+  eps_small2: 0.0002
+  max_iters: 4
+  tol_rel: 0.005
+overview:
+  entropy_file: spacetime_outputs/entropy.csv
+  hawking_file: spacetime_outputs/hawking_radiation.csv
+graph:
+  Lx: 3
+  Ly: 3
+constants:
+  G: 6.6743e-11
+  M_sun: 1.98847e30
+  c: 2.99792458e8
+  a_mercury: 5.79e10
+  e_mercury: 0.206
+r6:
+  planets:
+  - Mercury
+  - Venus
+  - Earth
+  integrators:
+  - rk4
+  steps_per_orbit_list:
+  - 96000
+  - 192000
+  - 384000
+  steps_per_orbit_overrides:
+    Mercury:
+    - 192000
+    - 384000
+    - 768000
+    Venus:
+    - 100000
+    - 200000
+    - 300000
+    Earth:
+    - 80000
+    - 160000
+    - 320000
+  periods: 120
+  use_perihelia_from: 10
+  use_perihelia_to: 110
+  epsilon: 0.95
+  refine:
+    enabled: false
+    target_rel_err: 0.02
+    max_levels: 2
+    refine_factor: 2
+  constants:
+    G: 6.6743e-11
+    M_sun: 1.98847e30
+    c: 2.99792458e8
+  constants_planets:
+    Mercury:
+      a: 5.79e10
+      e: 0.206
+    Venus:
+      a: 1.082e11
+      e: 0.007
+    Earth:
+      a: 1.496e11
+      e: 0.0167
+  max_total_steps: 5000000
+  store_stride: 2
+  filename_suffix: eps_0.950000000
+r7:
+  planets:
+  - Mercury
+  - Venus
+  - Earth
+  integrators:
+  - vv
+  - rk4
+  periods: 60
+  steps_per_orbit_list:
+  - 96000
+  - 192000
+  - 384000
+  steps_per_orbit_overrides:
+    Mercury:
+    - 192000
+    - 384000
+    - 768000
+  epsilon_mode: from_r6
+  epsilon_fixed:
+    Mercury: 1.0
+    Venus: 1.0
+    Earth: 1.0
+  epsilon_base: 1.0
+  constants:
+    G: 6.6743e-11
+    M_sun: 1.98847e30
+    c: 2.99792458e8
+  constants_planets:
+    Mercury:
+      a: 5.79e10
+      e: 0.206
+    Venus:
+      a: 1.082e11
+      e: 0.0067
+    Earth:
+      a: 1.496e11
+      e: 0.0167
+r8:
+  r6_summary_file: C:\Users\youngkg\source\repos\EntanglementSpacetime\entanglement_validation\validation_outputs\R12_eps_0.950000000\R6_perihelion_summary_eps_0.950000000.csv
+edg_demo:
+  curvature_file: spacetime_outputs/curvature_lattice.csv
+  step0_column: Step 0
+  xi_mode: mean_abs
+  planets:
+  - Mercury
+  - Venus
+  - Earth
+  epsilon_calibrated_mercury: 0.9253238
+  steps_per_orbit: 40000
+  periods: 120
+  constants:
+    G: 6.6743e-11
+    M_sun: 1.98847e30
+    c: 2.99792458e8
+  constants_planets:
+    Mercury:
+      a: 5.79e10
+      e: 0.206
+    Venus:
+      a: 1.082e11
+      e: 0.0068
+    Earth:
+      a: 1.496e11
+      e: 0.0167

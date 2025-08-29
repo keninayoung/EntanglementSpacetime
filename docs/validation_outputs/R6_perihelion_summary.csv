@@ -1,0 +1,2 @@
+planet,integrator,epsilon_used,gr_rad_per_orbit,A0_extrapolated,relative_error,min_dt,max_dt,periods,p_order
+Mercury,rk4,1.0,5.020397563144374e-07,5.020400533425436e-07,5.916425988660479e-07,19.788100443756367,39.576200887512734,120,4

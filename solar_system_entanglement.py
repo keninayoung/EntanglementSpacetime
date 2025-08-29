@@ -22,8 +22,10 @@
 
 import os
 import argparse
-import numpy as np
+import matplotlib
+matplotlib.use("Agg")  # render off-screen; avoid GUI overhead
 import matplotlib.pyplot as plt
+import numpy as np
 from matplotlib import animation
 import pandas as pd
 
@@ -60,6 +62,9 @@ USE_ENTANGLEMENT_DRIVE = bool(args.use_entanglement)        # off by default
 USE_SPATIAL_CURVATURE_MOD = bool(args.use_spatial_curvature)
 USE_TRAILS = not bool(args.no_trails)
 TRAIL_LEN = int(args.trail_len)
+
+USE_ENTANGLEMENT_DRIVE = True
+USE_SPATIAL_CURVATURE_MOD = True
 
 K0 = 100.0                          # base pull constant
 ALPHA_ENTR_RATE = 0.02              # weight on normalized dEntropy/dt
@@ -240,6 +245,65 @@ for planet, a in a_dict.items():
     positions[planet] = p0
     velocities[planet] = v0
 
+
+# --------------------------------------------------
+# Fast entropy plot (Earth) 
+# Key speedups:
+#  - Non-interactive backend (Agg)
+#  - Optional decimation for very long series
+#  - No tight_layout(), no bbox_inches="tight"
+#  - Antialiasing off, small linewidth
+#  - Path simplification on
+# --------------------------------------------------
+def _decimate_xy(x, y, max_points=100_000):
+    """
+    Downsample (x,y) if longer than max_points using stride decimation.
+    Keeps endpoints to preserve extents. O(1) memory.
+    """
+    n = len(x)
+    if n <= max_points or max_points <= 0:
+        return x, y
+    step = max(1, n // max_points)
+    # Keep first/last for exact bounds
+    x_dec = np.concatenate([x[::step], x[-1:]])
+    y_dec = np.concatenate([y[::step], y[-1:]])
+    return x_dec, y_dec
+
+def plot_entropy_fast(t, s, out_path, title="Entanglement Entropy (Earth)",
+                      max_points=100_000, linewidth=1.0):
+    # Ensure ndarray (float32 reduces memory/bandwidth for large series)
+    t = np.asarray(t, dtype=np.float32)
+    s = np.asarray(s, dtype=np.float32)
+
+    # Optional decimation for very long series
+    t_plot, s_plot = _decimate_xy(t, s, max_points=max_points)
+
+    # Lightweight figure setup
+    plt.rcParams["path.simplify"] = True
+    plt.rcParams["path.simplify_threshold"] = 0.5  # larger => more simplification
+
+    fig, ax = plt.subplots(figsize=(8, 4))
+    line, = ax.plot(
+        t_plot, s_plot,
+        label="Entanglement Entropy (Earth)",
+        antialiased=False,
+        linewidth=linewidth,
+    )
+    # If exporting to vector formats with many points, consider rasterizing the line:
+    # line.set_rasterized(True)
+
+    ax.set_xlabel("Time (scaled units)")
+    ax.set_ylabel("Entropy")
+    ax.set_title(title)
+    ax.legend(loc="best", frameon=False)
+    ax.margins(x=0.01, y=0.05)  # cheap margins; avoids tight_layout()
+
+    # Save without tight/bbox passes (these can be slow on big plots)
+    fig.savefig(out_path, dpi=160)
+    plt.close(fig)
+
+
+
 trajectories = {p: [positions[p].copy()] for p in a_dict.keys()}
 
 # synthetic entropy time vector for the example plot
@@ -256,9 +320,9 @@ for p in a_dict.keys():
             e_val = peak_entropy - (peak_entropy - base_entropy) * ((ti - peak_time) / (t[-1] - peak_time))**2
         entropy[p][i] = e_val
 
-# -------------------------
+# -------------------------------
 # Integrate with Velocity Verlet
-# -------------------------
+# -------------------------------
 print("Integrating motion using Velocity Verlet...")
 for step in range(N_STEPS):
     if step % 100 == 0:
@@ -294,9 +358,9 @@ for step in range(N_STEPS):
 trajectories = {p: np.array(traj) for p, traj in trajectories.items()}
 print("Motion integration completed.")
 
-# -------------------------
+# ---------------------------------
 # Separation checks and snapshots
-# -------------------------
+# ---------------------------------
 def min_pair_sep(traj_a, traj_b):
     d = np.linalg.norm(traj_a - traj_b, axis=1)
     return float(d.min())
@@ -398,17 +462,16 @@ try:
 except Exception as e:
     print(f"MP4 export skipped (ffmpeg not available): {e}")
 
-# Entropy plot example (Earth)
+# Plot entanglement entropy  for Earth
 print("Saving entanglement entropy plot for Earth...")
-fig_entropy, ax_entropy = plt.subplots(figsize=(8, 4))
-ax_entropy.plot(t, entropy['Earth'], label='Entanglement Entropy (Earth)')
-ax_entropy.set_xlabel('Time (scaled units)')
-ax_entropy.set_ylabel('Entropy')
-ax_entropy.set_title("Entanglement Entropy During Earth's Orbit (synthetic)")
-ax_entropy.legend()
-fig_entropy.tight_layout()
-fig_entropy.savefig(SAVE_ENTROPY_PNG, dpi=160)
-plt.close(fig_entropy)
+plot_entropy_fast(
+    t=t,
+    s=entropy["Earth"],
+    out_path=SAVE_ENTROPY_PNG,
+    title="Entanglement Entropy During Earth's Orbit (synthetic)",
+    max_points=100_000,  # tune: lower for faster/smaller files, higher for more detail
+    linewidth=1.0
+)
 print(f"Entropy plot saved to {SAVE_ENTROPY_PNG}.")
 
 print("Simulation and visualization completed successfully!")

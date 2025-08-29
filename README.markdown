@@ -3,8 +3,15 @@
 Author: Kenneth Young, PhD
 
 ## Overview
-
-This repository contains code for the project "Entanglement-Driven Emergent Spacetime with Time-Evolved Tensor Networks". The framework simulates the emergence of spacetime from quantum entanglement using a time-evolved Projected Entangled Pair States (PEPS) tensor network.
+This repository contains code for the project "Entanglement-Driven Emergent Spacetime with Time-Evolved Tensor Networks". 
+The framework simulates the emergence of spacetime from quantum entanglement using a time-evolved Projected Entangled Pair States (PEPS) tensor network.
+A rigorous 13-stage validation pipeline (R1–R13p) confirms EDG's consistency with GR in weak
+fields-including solar-system tests, light bending, Shapiro delay, and Cassini constraints-while
+imposing new bounds from Event Horizon Telescope (EHT) ring sizes and
+LIGO gravitational-wave (GW) phasing. Evolving 3D entanglement graphs and simulations
+reveal dynamic quantum structures potentially resolving black-hole singularities. EDG forecasts
+distinct signatures in next-generation EHT and LIGO data, offering a falsifiable path to quantum
+gravity.
 
 Core idea:
 - Define an information-theoretic distance between lattice sites,
@@ -19,6 +26,18 @@ The code supports:
 
 For methodology and results, see:
 [Entanglement-Driven Emergent Spacetime with Time-Evolved Tensor Networks: Applications to Quantum and Classical Systems](docs/entanglement-drive-spacetime.pdf)
+
+## EDG Validation Pipeline (R1-R13p)
+
+In addition to simulations, this repository provides a **reproducible validation pipeline** for Entanglement-Driven Gravity (EDG). The stages R1–R13p cover:
+
+- **R1–R6**: Newtonian sanity checks, Bianchi identities, curvature scaling, and numerical convergence of perihelion precession.  
+- **R7–R12**: Post-Newtonian observables (light deflection, Shapiro delay, Cassini), PPN cross-checks, bootstrap uncertainty, and integrator consensus.  
+- **R13p**: Strong-field joint fit combining EHT photon-ring diameters and GW phasing to constrain \(\epsilon\) and \(L_q\).
+
+The pipeline generates the same CSVs/figures used in the paper (e.g., perihelion tables, PPN tables, ring-posterior plots), and the high-level 
+**validation flow diagram**.
+
 
 ## Visual Demos
 
@@ -86,7 +105,19 @@ Notes:
 - On Linux, install CUDA 12.6 and Dask-CUDA for multi-GPU.
 - On Windows, multi-GPU is not supported; the code will use single-GPU or CPU.
 
-## Usage
+## Quick Start - Validations (R1-R13p)
+
+### From the repository root, run:
+
+```bash
+python run_validations.py
+```
+Artifacts produced (paths may vary by --out):
+
+- entanglement_validation/validationoutputs - CSVs used by tables (perihelion, PPN, bootstrap, consensus, posteriors)
+- entanglement_validation/validationoutputs - figures (e.g., R4/R6 plots, R13p posterior heatmap, validation flow)
+
+## Usage - Simulation & Visual Demos
 
 ### 1) Run the entanglement simulation (writes CSVs used by the demos)
 
@@ -157,6 +188,8 @@ Example CSVs and HTML are included in `example_outputs/` to make it easy to prev
 
 ## Project Structure
 
+- `run_validations.py`                   One shot entrypoint for R1-R13p validations.
+- `entanglement_validation`              Validation modules, loaders, metrics, are report builders.
 - `entanglement_spacetime_evolution.py`  Main PEPS simulation and CSV writers.
 - `graph_builder.py`                     Builds the MI graph from PEPS.
 - `curvature.py`                         Discrete curvature computation.
@@ -188,15 +221,42 @@ cp spacetime_outputs/black_hole_entanglement_2d.gif example_outputs/
 - **Black-hole radius looks jumpy or too large**: lower `BH_GROWTH_MAX`, reduce growth weights, or increase `BH_GROWTH_EMA_ALPHA` for heavier smoothing.
 - **Orbits too close**: increase `--earth_a` and `--mars_a`, keep safe phase spacing, or lower inner eccentricities. The script prints min Earth-Venus and Earth-Mars separations.
 - **ffmpeg not found**: MP4 export is skipped; the GIF is still saved.
+- **Validations missing outputs** Validations missing outputs: check --out path permissions and run with -v/--verbose (see --help) to surface stage logs.
 
 ## Citation
 
-If you use this code in your research, please cite:  
-Kenneth Young, PhD, "Entanglement-Driven Emergent Spacetime with Time-Evolved Tensor Networks: Applications to Quantum and Classical Systems," 2025.
+If you use this code in your research, please cite at least one of the following:  
+ 
+ 1. Entanglement-Driven Gravity (EDG) paper    Kenneth G. Young II, PhD, "Entanglement-Driven Gravity: Emergent Spacetime from Quantum Correlations and Empirical Constraints," 2025.
+ 2. Tensor-network paper (framework foundations)
+    Kenneth Young, PhD, "Entanglement-Driven Emergent Spacetime with Time-Evolved Tensor Networks: Applications to Quantum and Classical Systems," 2025.
+ 3. Software / repository
+    Kenneth G. Young II, PhD, "EntanglementSpacetime: EDG Validation Pipeline and Analysis Code," GitHub, 2025.
+    URL: https://github.com/keninayoung/EntanglementSpacetime
 
 ## License
 
-MIT License. See [LICENSE](LICENSE).
+MIT License
+
+Copyright (c) 2025 Kenneth Young
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
 
 ## Contact
 

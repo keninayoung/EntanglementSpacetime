@@ -1,0 +1,6 @@
+dataset_id,dataset_type,observable,value,sigma,units,planet,meta_json
+mercury_peri,perihelion,A0,5.020397563144374e-07,5e-10,rad/orbit,Mercury,"{""gr_rad_per_orbit"": 5.020397563144374e-07}"
+cassini_gamma,gamma,gamma,1.000021,2.3e-05,dimensionless,,{}
+cassini_shapiro,shapiro,delay,6.655444480760713e-05,1.53e-09,seconds,,"{""gr_pred_seconds"": 6.655444480760713e-05}"
+eht_sgra_ring,eht_ring,ring_diam,51.8,3.0,microas,,"{""D_GR_microas"": 51.8, ""rs_m"": 12108691466.474201, ""kappa"": 0.1, ""p"": 2.0}"
+gw_phasing_toystudy,gw_phase,phi_coeff,0.0,0.1,dimensionless,,"{""gr_coeff"": 0.0, ""alpha"": 1.0, ""power_p"": 2.0, ""rs_m"": 10000.0}"

@@ -1,5 +1,6 @@
 # =============================================================================
 # EntanglementSpacetime Simulation Framework
+# EDG: Quantum-Informed Predictor of Classical Spacetime Dynamics
 # Authors: Kenneth Young, PhD; Paul Bransford
 # Last updated: 2025-08-19
 #

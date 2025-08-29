@@ -1,0 +1,6 @@
+dataset_id,dataset_type,observable,value,sigma,units,planet,meta_json
+mercury_peri_r12,perihelion,A0,5.020407154627621e-07,7.022399423223484e-15,rad/orbit,Mercury,"{""gr_rad_per_orbit"": 5.020397563144374e-07}"
+venus_peri_r12,perihelion,A0,2.572653713042418e-07,1.6366006196922165e-12,rad/orbit,Venus,"{""gr_rad_per_orbit"": 2.5726369574342205e-07}"
+earth_peri_r12,perihelion,A0,1.8611324536373642e-07,3.7316151526040395e-13,rad/orbit,Earth,"{""gr_rad_per_orbit"": 1.861118507151701e-07}"
+cassini_gamma,gamma,gamma,1.000021,2.3e-05,dimensionless,,{}
+cassini_shapiro,shapiro,delay,6.655444480760713e-05,1.53e-09,seconds,,"{""gr_pred_seconds"": 6.655444480760713e-05}"
