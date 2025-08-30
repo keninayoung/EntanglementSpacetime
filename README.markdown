@@ -29,6 +29,15 @@ For methodology and results, see:
 1. [Entanglement-Driven Gravity: Emergent Spacetime from Quantum Correlations and Empirical Constraints](docs/edg-emergent_spacetime.pdf)
 2. [Entanglement-Driven Emergent Spacetime with Time-Evolved Tensor Networks: Applications to Quantum and Classical Systems](docs/entanglement-drive-spacetime.pdf)
 
+## Significance Statement
+
+We propose Young’s Entanglement Driven Gravity (EDG), a novel theory uniting quantum entanglement with spacetime geometry. Building from the entanglement entropy functional, EDG derives an effective field equation where gradients of entanglement act as curvature sources. This approach recovers Einstein’s General Relativity (GR) in all tested weak-field regimes, yet naturally extends beyond GR in strong fields, where classical theory fails.
+
+A comprehensive validation framework (R1–R13p) demonstrates EDG’s robustness. Solar system dynamics, light bending, Shapiro delay, and Cassini γ constraints all confirm that EDG aligns with GR at established precision. Crucially, EDG departs from GR only in strong-field domains: near horizons, in black hole interiors, and in gravitational wave phasing. Anchored to Event Horizon Telescope (EHT) fractional ring size shifts and tested against toy LIGO waveforms, EDG provides consistent, falsifiable predictions where GR remains silent or divergent.
+
+The EDG framework is further grounded in numerical simulations of emergent spacetime via projected entangled pair states (PEPS), establishing a direct connection between entanglement dynamics, geometry, and curvature. By linking quantum information flow to gravitational phenomena, EDG opens a path toward resolving singularities, the black hole information paradox, and even practical advances in quantum networks and space exploration.
+
+
 ## EDG Validation Pipeline (R1-R13p)
 
 In addition to simulations, this repository provides a **reproducible validation pipeline** for Entanglement-Driven Gravity (EDG). The stages R1–R13p cover:
