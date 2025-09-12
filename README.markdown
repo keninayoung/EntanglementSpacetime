@@ -26,8 +26,9 @@ The code supports:
 
 For methodology and results, see:
 
-1. [Entanglement-Driven Gravity: Emergent Spacetime from Quantum Correlations and Empirical Constraints](docs/edg-emergent_spacetime.pdf)
-2. [Entanglement-Driven Emergent Spacetime with Time-Evolved Tensor Networks: Applications to Quantum and Classical Systems](docs/entanglement-drive-spacetime.pdf)
+1. [Entanglement-Driven Gravity: From Emergent Spacetime to Strong-Field Evidence Beyond GR](docs/edg-emergent_spacetime-v1.0.0.pdf)
+2. [Entanglement-Driven Gravity: Emergent Spacetime from Quantum Correlations and Empirical Constraints](docs/edg-emergent_spacetime.pdf)
+3. [Entanglement-Driven Emergent Spacetime with Time-Evolved Tensor Networks: Applications to Quantum and Classical Systems](docs/entanglement-drive-spacetime.pdf)
 
 ## Significance Statement
 
@@ -276,4 +277,5 @@ SOFTWARE.
 ## Contact
 
 Open an issue or reach out directly to the author.
+
 
