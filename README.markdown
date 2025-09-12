@@ -3,7 +3,8 @@
 Author: Kenneth Young, PhD
 
 ## Overview
-This repository contains code for the project "Entanglement-Driven Emergent Spacetime with Time-Evolved Tensor Networks". 
+This repository accompanies the first public release (v1.0.0) of the **Entanglement-Driven Gravity (EDG)** framework.  
+EDG is a falsifiable extension of general relativity in which spacetime curvature emerges from quantum entanglement. It is the **first entanglement-based gravity model statistically favored over GR** in strong-field astrophysical tests.
 The framework simulates the emergence of spacetime from quantum entanglement using a time-evolved Projected Entangled Pair States (PEPS) tensor network.
 A rigorous 13-stage validation pipeline (R1–R13p) confirms EDG's consistency with GR in weak
 fields-including solar-system tests, light bending, Shapiro delay, and Cassini constraints-while
@@ -12,6 +13,15 @@ LIGO gravitational-wave (GW) phasing. Evolving 3D entanglement graphs and simula
 reveal dynamic quantum structures potentially resolving black-hole singularities. EDG forecasts
 distinct signatures in next-generation EHT and LIGO data, offering a falsifiable path to quantum
 gravity.
+
+EDG proposes that spacetime curvature emerges from quantum entanglement. Unlike other emergent-gravity approaches, EDG introduces a minimal set of parameters \((\epsilon, L_q, p)\) that reduce to GR in the appropriate limits, while remaining directly testable against astrophysical data. 
+
+This release (v1.0.0) includes:
+- A **13-stage validation pipeline (R1–R13p)** from Newtonian sanity checks to strong-field astrophysical fits.
+- Reproducible numerical infrastructure for integrators, bootstrap resampling, and posterior inference.
+- Joint strong-field constraints from **EHT ring-size shifts** and **gravitational-wave phasing**, yielding:
+  - \(L_q \sim 10^{13}\,\mathrm{m}\), \(L_q < 1.17 \times 10^{13}\,\mathrm{m}\) (95% CI),
+  - EDG favored over GR (\(\Delta\)AIC ≈ –14, \(\Delta\)BIC ≈ –14, \(\Delta\log Z\) ≈ +7).
 
 Core idea:
 - Define an information-theoretic distance between lattice sites,
@@ -280,6 +290,7 @@ SOFTWARE.
 ## Contact
 
 Open an issue or reach out directly to the author.
+
 
 
 
