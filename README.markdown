@@ -50,7 +50,7 @@ In addition to simulations, this repository provides a **reproducible validation
 The pipeline generates the same CSVs/figures used in the paper (e.g., perihelion tables, PPN tables, ring-posterior plots), and the high-level 
 
 **Validation Flow Diagram**.
-![Validation Flow Diagram](docs/figs/validation_flow.png)
+![Validation Flow Diagram](docs/figs/edg_pipeline.png)
 
 ## Visual Demos
 
@@ -240,13 +240,16 @@ cp spacetime_outputs/black_hole_entanglement_2d.gif example_outputs/
 
 If you use this code in your research, please cite at least one of the following:  
  
- 1. Entanglement-Driven Gravity (EDG) paper
-    Kenneth G. Young II, PhD, "Entanglement-Driven Gravity: Emergent Spacetime from Quantum Correlations and Empirical Constraints," 2025.
+ 1. Entanglement-Driven Gravity (EDG): From Emergent Spacetime to Strong-Field Evidence Beyond GR
+    Kenneth G. Young II, PhD, "Entanglement-Driven Gravity (EDG): From Emergent Spacetime to Strong-Field Evidence Beyond GR" 2025.
+    [Entanglement-Driven Gravity (EDG): From Emergent Spacetime to Strong-Field Evidence Beyond GR](docs/edg-emergent_spacetime-v1.0.0.pdf)   
+ 2. Entanglement-Driven Gravity (EDG) paper
+    Kenneth G. Young II, PhD, "Entanglement-Driven Gravity: Emergent Spacetime from Quantum Correlations and Empirical Constraints" 2025.
     [Entanglement-Driven Gravity: Emergent Spacetime from Quantum Correlations and Empirical Constraints](docs/edg-emergent_spacetime.pdf)   
- 2. Tensor-network paper (framework foundations)
-    Kenneth Young, PhD, "Entanglement-Driven Emergent Spacetime with Time-Evolved Tensor Networks: Applications to Quantum and Classical Systems," 2025.
+ 3. Tensor-network paper (framework foundations)
+    Kenneth Young, PhD, "Entanglement-Driven Emergent Spacetime with Time-Evolved Tensor Networks: Applications to Quantum and Classical Systems" 2025.
     [Entanglement-Driven Emergent Spacetime with Time-Evolved Tensor Networks: Applications to Quantum and Classical Systems](docs/entanglement-drive-spacetime.pdf)
- 3. Software / repository
+ 4. Software / repository
     Kenneth G. Young II, PhD, "EntanglementSpacetime: EDG Validation Pipeline and Analysis Code," GitHub, 2025.
     URL: https://github.com/keninayoung/EntanglementSpacetime
 
@@ -277,5 +280,6 @@ SOFTWARE.
 ## Contact
 
 Open an issue or reach out directly to the author.
+
 
 
