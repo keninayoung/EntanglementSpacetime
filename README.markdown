@@ -14,15 +14,22 @@ reveal dynamic quantum structures potentially resolving black-hole singularities
 distinct signatures in next-generation EHT and LIGO data, offering a falsifiable path to quantum
 gravity.
 
-EDG proposes that spacetime curvature emerges from quantum entanglement. Unlike other emergent-gravity approaches, EDG introduces a minimal set of parameters \((\epsilon, L_q, p)\) that reduce to GR in the appropriate limits, while remaining directly testable against astrophysical data. 
+EDG proposes that spacetime curvature emerges from quantum entanglement. Unlike other emergent-gravity approaches, EDG introduces a minimal set of parameters that reduce to GR in the appropriate limits, while remaining directly testable against astrophysical data. 
 
 This release (v1.0.0) includes:
 - A **13-stage validation pipeline (R1–R13p)** from Newtonian sanity checks to strong-field astrophysical fits.
 - Reproducible numerical infrastructure for integrators, bootstrap resampling, and posterior inference.
 - Joint strong-field constraints from **EHT ring-size shifts** and **gravitational-wave phasing**, yielding:
-  - \(L_q \sim 10^{13}\,\mathrm{m}\), \(L_q < 1.17 \times 10^{13}\,\mathrm{m}\) (95% CI),
-  - EDG favored over GR (\(\Delta\)AIC ≈ –14, \(\Delta\)BIC ≈ –14, \(\Delta\log Z\) ≈ +7).
 
+    **Strong-field constraint:**
+    ![Lq constraint](docs/figs/Lq_constraint.svg)
+
+    **Model comparison:**
+    ![Model comparison](docs/figs/model_comparison.svg)
+
+    **Information-theoretic distance:**
+    ![Mutual information distance](docs/figs/mutual_info_distance.svg)
+    
 Core idea:
 - Define an information-theoretic distance between lattice sites,
   `d(i,j) ~ -log I(i:j)`, where `I(i:j)` is the mutual information.
@@ -67,11 +74,9 @@ The pipeline generates the same CSVs/figures used in the paper (e.g., perihelion
 These visualizations are driven by the quantum outputs written to `spacetime_outputs/`:
 
 - **Quantum-derived orbits** (classical orbits whose central pull is modulated by entropy and Hawking-like mutual information):
-
   ![Quantum derived orbits](example_outputs/animated_quantum_earth_orbit.gif)
 
 - **Black-hole animation** (stars accrete toward a black hole whose on-plot radius equals a mapped Schwarzschild radius; radius grows smoothly and monotonically based on quantum signals):
-
   ![Black hole entanglement animation](example_outputs/black_hole_entanglement_2d.gif)
 
 ## How the quantum outputs drive the visuals
@@ -290,6 +295,7 @@ SOFTWARE.
 ## Contact
 
 Open an issue or reach out directly to the author.
+
 
 
 
