@@ -112,12 +112,15 @@
     <Content Include=".gitignore" />
     <Content Include="docs\archive_docs\entanglement-drive-spacetime-3x3.pdf" />
     <Content Include="docs\archive_docs\entanglement-drive-spacetime-noorbits.pdf" />
+    <Content Include="docs\edg-emergent_spacetime-v1.0.0.pdf" />
     <Content Include="docs\edg-emergent_spacetime.pdf" />
     <Content Include="docs\entanglement-drive-spacetime.pdf" />
     <Content Include="docs\figs\3d_entanglement_graph_t1.png" />
     <Content Include="docs\figs\3d_entanglement_graph_t49.png" />
     <Content Include="docs\figs\black_hole_entanglement_2d.gif" />
     <Content Include="docs\figs\black_hole_entanglement_2d_still.png" />
+    <Content Include="docs\figs\edg_pipeline.png" />
+    <Content Include="docs\figs\edg_schematic.png" />
     <Content Include="docs\figs\R13p_A_m87_mu002_sig005_posterior_heatmap.png" />
     <Content Include="docs\figs\R13p_B_sgrA_mu002_sig005_20250827-130424_posterior_heatmap.png" />
     <Content Include="docs\figs\R13p_C_m87_mu0p015_sig0p005_20250827-130906_posterior_heatmap.png" />
