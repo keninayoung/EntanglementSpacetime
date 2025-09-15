@@ -3,34 +3,70 @@
 Author: Kenneth Young, PhD
 
 ## Overview
-This repository accompanies the first public release (v1.0.0) of the **Entanglement-Driven Gravity (EDG)** framework.  
-EDG is a falsifiable extension of general relativity in which spacetime curvature emerges from quantum entanglement. It is the **first entanglement-based gravity model statistically favored over GR** in strong-field astrophysical tests.
-The framework simulates the emergence of spacetime from quantum entanglement using a time-evolved Projected Entangled Pair States (PEPS) tensor network.
-A rigorous 13-stage validation pipeline (R1–R13p) confirms EDG's consistency with GR in weak
-fields-including solar-system tests, light bending, Shapiro delay, and Cassini constraints-while
-imposing new bounds from Event Horizon Telescope (EHT) ring sizes and
-LIGO gravitational-wave (GW) phasing. Evolving 3D entanglement graphs and simulations
-reveal dynamic quantum structures potentially resolving black-hole singularities. EDG forecasts
-distinct signatures in next-generation EHT and LIGO data, offering a falsifiable path to quantum
-gravity.
 
-EDG proposes that spacetime curvature emerges from quantum entanglement. Unlike other emergent-gravity approaches, EDG introduces a minimal set of parameters that reduce to GR in the appropriate limits, while remaining directly testable against astrophysical data. 
+This repository implements **Entanglement-Driven Gravity (EDG)**, an information-theoretic framework in which spacetime geometry emerges from quantum entanglement. The codebase includes both the **quantum simulation modules** (PEPS evolution, entanglement entropy, curvature, Einstein-like tensor approximations) and a **13-stage validation pipeline (R1–R13p)** that confronts EDG predictions with observational data.  
 
-This release (v1.0.0) includes:
-- A **13-stage validation pipeline (R1–R13p)** from Newtonian sanity checks to strong-field astrophysical fits.
-- Reproducible numerical infrastructure for integrators, bootstrap resampling, and posterior inference.
-- Joint strong-field constraints from **EHT ring-size shifts** and **gravitational-wave phasing**, yielding:
+- **Weak-field validations (R1–R12):** EDG reproduces Newtonian and post-Newtonian observables, including perihelion precession, Shapiro delay, and Cassini $\gamma$ constraints.  
+- **Strong-field validation (R13p):** A joint analysis of **Event Horizon Telescope (EHT)** photon-ring diameters and **gravitational-wave (GW)** inspiral phasing.  
+  - EHT defaults are constructed in-code from published results (M87*: $42 \pm 3$ μas, Sgr A*: $51.8 \pm 2.3$ μas)~[[EHT2019](https://iopscience.iop.org/article/10.3847/2041-8213/ab0ec7), [EHT2022](https://iopscience.iop.org/article/10.3847/2041-8213/ac6674)].  
+  - GW phase constraints are based on LIGO–Virgo catalogs (e.g., GWTC-1)~[[Abbott2016](https://journals.aps.org/prl/abstract/10.1103/PhysRevLett.116.061102)].  
+- **Results:** The joint posterior decisively favors EDG over GR, with finite $L_q \sim 10^{13}\,\mathrm{m}$ statistically preferred by the data.  
 
-    **Strong-field constraint:**
-    ![Lq constraint](docs/figs/Lq_constraint.svg)
+## Implementation of the Informational-Stress Equation
 
-    **Model comparison:**
-    ![Model comparison](docs/figs/model_comparison.svg)
+The novel **EDG informational-stress equation** is implemented not as a single monolithic routine but as a distributed set of modules:  
 
-    **Information-theoretic distance:**
-    ![Mutual information distance](docs/figs/mutual_info_distance.svg)
+- **Einstein-like tensor from entanglement:**  
+  - `einstein_tensor.py` computes $\rho_{\mathrm{ent}}$ (entanglement density) and $T^{\mu\nu}_{\mathrm{ent}}$ (informational stress tensor) from mutual information and entropy inputs.  
+- **Entropy gradients and curvature contributions:**  
+  - `entropy.py` evaluates $\nabla S$;  
+  - `curvature.py` assembles discrete curvature and Laplacian-like terms ($\nabla^2 S$).  
+- **Force/potential updates:**  
+  - In `solar_system_entanglement.py`, these informational sources modulate the Newtonian pull, blending $dS/dt$, Hawking-like mutual information, and optional spatial curvature multipliers.  
+- **Simulation orchestration:**  
+  - `entanglement_spacetime_evolution.py` evolves the PEPS tensor network, computes sources, and exports CSVs (`entropy.csv`, `hawking_radiation.csv`, `curvature_lattice.csv`) for downstream validations and visualizations.  
+
+Thus, $\rho_{\mathrm{ent}}$ acts as the source density and $T^{\mu\nu}_{\mathrm{ent}}$ provides the stress tensor, both coupled discretely into potential updates in orbital and black-hole demos.  
+
+## Strong-Field Stage (R13p)
+
+- **Joint likelihood:** Combines fractional EHT photon-ring shifts and a toy GW phase correction consistent with the same $(L_q, p)$ scaling.  
+- **Implementation:** While not exposed as a named additive $\Psi_{\mathrm{GR}} + \delta\Psi$ function, this correction is fully included in `validation_r13p_joint_observational_fit.py`.  
+- **Data handling:**  
+  - Default EHT inputs are hard-coded from published values (Sgr A*: $51.8 \pm 3.0$ μas; M87*: $42 \pm 3$ μas).  
+  - Schwarzschild radii $r_s = 2GM/c^2$ are computed dynamically from the supplied or default black hole mass.  
+  - Inputs can be overridden via command-line flags (`--add_eht sgrA`, `--add_eht m87`, etc.), custom masses, or external CSVs.  
+  - Outputs include the posterior grid, 1D marginals, constraints tables, sigma-forecast tables, and the posterior heatmap figure.  
+
+For transparency, defaults and overrides are documented directly in  
+[`validation_r13p_joint_observational_fit.py`](entanglement_validation/scripts/validation_r13p_joint_observational_fit.py).
+
+
+## Significance
+
+EDG is the **first entanglement-based gravity theory** to progress from conceptual plausibility to **phenomenological support**:  
+
+- Recovers GR in tested Newtonian and post-Newtonian regimes.  
+- Extends to strong fields with falsifiable deviations tied to entanglement structure.  
+- Bridges **quantum information, black-hole thermodynamics, and cosmology** under a single, testable framework.  
+
+In short: **EDG is no longer speculation — it is a data-driven, falsifiable path toward quantum gravity.**
+
+
+## Release v1.0.0
+This release includes:
+  - A **13-stage validation pipeline (R1–R13p)** from Newtonian sanity checks to strong-field astrophysical fits.
+  - Reproducible numerical infrastructure for integrators, bootstrap resampling, and posterior inference.
+  - Joint strong-field constraints from **EHT ring-size shifts** and **gravitational-wave phasing**, yielding:
+
+    - **Strong-field constraint:**
+       - ![Lq constraint](docs/figs/Lq_constraint.svg)
+    - **Model comparison:**
+       - ![Model comparison](docs/figs/model_comparison.svg)
+    - **Information-theoretic distance:**
+       - ![Mutual information distance](docs/figs/mutual_info_distance.svg)
     
-Core idea:
+## Core idea:
 - Define an information-theoretic distance between lattice sites,
   `d(i,j) ~ -log I(i:j)`, where `I(i:j)` is the mutual information.
 - From this, compute discrete curvature, approximate an Einstein-like tensor, and
@@ -41,19 +77,11 @@ The code supports:
 - Multi-GPU parallelization on Linux using Dask-CUDA.
 - CPU-only mode on both platforms.
 
-For methodology and results, see:
+## For methodology and results, see:
 
 1. [Entanglement-Driven Gravity: From Emergent Spacetime to Strong-Field Evidence Beyond GR](docs/edg-emergent_spacetime-v1.0.0.pdf)
 2. [Entanglement-Driven Gravity: Emergent Spacetime from Quantum Correlations and Empirical Constraints](docs/edg-emergent_spacetime.pdf)
 3. [Entanglement-Driven Emergent Spacetime with Time-Evolved Tensor Networks: Applications to Quantum and Classical Systems](docs/entanglement-drive-spacetime.pdf)
-
-## Significance Statement
-
-We propose Young’s Entanglement Driven Gravity (EDG), a novel theory uniting quantum entanglement with spacetime geometry. Building from the entanglement entropy functional, EDG derives an effective field equation where gradients of entanglement act as curvature sources. This approach recovers Einstein’s General Relativity (GR) in all tested weak-field regimes, yet naturally extends beyond GR in strong fields, where classical theory fails.
-
-A comprehensive validation framework (R1–R13p) demonstrates EDG’s robustness. Solar system dynamics, light bending, Shapiro delay, and Cassini γ constraints all confirm that EDG aligns with GR at established precision. Crucially, EDG departs from GR only in strong-field domains: near horizons, in black hole interiors, and in gravitational wave phasing. Anchored to Event Horizon Telescope (EHT) fractional ring size shifts and tested against toy LIGO waveforms, EDG provides consistent, falsifiable predictions where GR remains silent or divergent.
-
-The EDG framework is further grounded in numerical simulations of emergent spacetime via projected entangled pair states (PEPS), establishing a direct connection between entanglement dynamics, geometry, and curvature. By linking quantum information flow to gravitational phenomena, EDG opens a path toward resolving singularities, the black hole information paradox, and even practical advances in quantum networks and space exploration.
 
 
 ## EDG Validation Pipeline (R1-R13p)
@@ -64,6 +92,17 @@ In addition to simulations, this repository provides a **reproducible validation
 - **R7–R12**: Post-Newtonian observables (light deflection, Shapiro delay, Cassini), PPN cross-checks, bootstrap uncertainty, and integrator consensus.  
 - **R13p**: Strong-field joint fit combining EHT photon-ring diameters and GW phasing to constrain \(\epsilon\) and \(L_q\).
 
+### How to Reproduce R13p
+
+The R13p joint fit can be reproduced directly from the repository.  
+This combines **EHT ring-diameter data** and **GW phase constraints** into a joint likelihood over $(\epsilon, L_q, p)$.
+
+Example (M87* + toy GW row, fractional mode):  
+```bash
+python entanglement_validation/scripts/validation_r13p_joint_observational_fit.py \
+    --add_eht m87 --eht_mode fractional --eht_mu_frac 0.0 --eht_sigma_frac 0.02 \
+    --add_gw --gw_mu_frac 0.0 --gw_sigma_frac 0.02 --gw_mass 30.0 --check
+```
 The pipeline generates the same CSVs/figures used in the paper (e.g., perihelion tables, PPN tables, ring-posterior plots), and the high-level 
 
 **Validation Flow Diagram**.
@@ -295,6 +334,7 @@ SOFTWARE.
 ## Contact
 
 Open an issue or reach out directly to the author.
+
 
 
 
