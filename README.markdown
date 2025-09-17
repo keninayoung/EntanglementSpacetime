@@ -12,6 +12,10 @@ This repository implements **Entanglement-Driven Gravity (EDG)**, an information
   - GW phase constraints are based on LIGO–Virgo catalogs (e.g., GWTC-1)~[[Abbott2016](https://journals.aps.org/prl/abstract/10.1103/PhysRevLett.116.061102)].  
 - **Results:** The joint posterior decisively favors EDG over GR, with finite $L_q \sim 10^{13}\,\mathrm{m}$ statistically preferred by the data.  
 
+## Paper 
+Preprint: Entanglement-Driven Gravity (EDG): From Emergent Spacetime to Strong-Field Evidence Beyond GR (v1.0.0, September 15, 2025). This version is a preprint and may differ from the published version. Upon acceptance, the accepted manuscript will be posted with a DOI. Code for reproducibility is in this repository.  
+[Entanglement-Driven Gravity (EDG): From Emergent Spacetime to Strong-Field Evidence Beyond GR](docs/edg-emergent_spacetime-v1.0.0.pdf)   
+
 ## Implementation of the Informational-Stress Equation
 
 The novel **EDG informational-stress equation** is implemented not as a single monolithic routine but as a distributed set of modules:  
@@ -334,6 +338,7 @@ SOFTWARE.
 ## Contact
 
 Open an issue or reach out directly to the author.
+
 
 
 
