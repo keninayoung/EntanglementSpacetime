@@ -1,20 +1,33 @@
-# Entanglement Spacetime
+# Entanglement Spacetime:  A Computational Framework for Testing Emergent Gravity
 
 Author: Kenneth Young, PhD
 
+
+This repository provides a **reproducible computational framework for testing entanglement-based models of spacetime geometry**. It implements Entanglement-Driven Gravity (EDG) as a working example and includes a full validation pipeline (R1–R13p) that compares theoretical predictions with weak-field and strong-field observational summaries, including perihelion precession, Shapiro delay, Event Horizon Telescope photon-ring measurements, and gravitational-wave inspiral constraints. The goal of the project is to provide a transparent and extensible platform where emergent spacetime models can be implemented, validated, and quantitatively compared with astrophysical data.
+
 ## Overview
 
-This repository implements **Entanglement-Driven Gravity (EDG)**, an information-theoretic framework in which spacetime geometry emerges from quantum entanglement. The codebase includes both the **quantum simulation modules** (PEPS evolution, entanglement entropy, curvature, Einstein-like tensor approximations) and a **13-stage validation pipeline (R1–R13p)** that confronts EDG predictions with observational data.  
+This repository provides a **reproducible computational framework for exploring entanglement-based models of spacetime geometry**. It implements **Entanglement-Driven Gravity (EDG)** as a working example within this framework, where spacetime structure is modeled as emerging from patterns of quantum entanglement.  
+
+The codebase includes both the **quantum simulation modules** (PEPS evolution, entanglement entropy, curvature reconstruction, and Einstein-like tensor approximations) and a **13-stage validation pipeline (R1–R13p)** designed to evaluate such models against weak-field and strong-field observational summaries.
+
 
 - **Weak-field validations (R1–R12):** EDG reproduces Newtonian and post-Newtonian observables, including perihelion precession, Shapiro delay, and Cassini $\gamma$ constraints.  
 - **Strong-field validation (R13p):** A joint analysis of **Event Horizon Telescope (EHT)** photon-ring diameters and **gravitational-wave (GW)** inspiral phasing.  
   - EHT defaults are constructed in-code from published results (M87*: $42 \pm 3$ μas, Sgr A*: $51.8 \pm 2.3$ μas)~[[EHT2019](https://iopscience.iop.org/article/10.3847/2041-8213/ab0ec7), [EHT2022](https://iopscience.iop.org/article/10.3847/2041-8213/ac6674)].  
   - GW phase constraints are based on LIGO–Virgo catalogs (e.g., GWTC-1)~[[Abbott2016](https://journals.aps.org/prl/abstract/10.1103/PhysRevLett.116.061102)].  
-- **Results:** The joint posterior decisively favors EDG over GR, with finite $L_q \sim 10^{13}\,\mathrm{m}$ statistically preferred by the data.  
+- **Results:** The joint posterior illustrates how entanglement-derived corrections can be explored within the adopted phenomenological likelihood, with finite $L_q \sim 10^{13}$ m emerging as a representative scale in the analysis.
 
-## Paper 
-Preprint: Entanglement-Driven Gravity (EDG): From Emergent Spacetime to Strong-Field Evidence Beyond GR (v1.0.0, September 15, 2025). This version is a preprint and may differ from the published version. Upon acceptance, the accepted manuscript will be posted with a DOI. Code for reproducibility is in this repository.  
-[Entanglement-Driven Gravity (EDG): From Emergent Spacetime to Strong-Field Evidence Beyond GR](docs/edg-emergent_spacetime-v1.0.0.pdf)   
+## Paper
+
+Preprint: **A Reproducible Computational Framework for Entanglement-Driven Gravity (EDG)**.
+
+This paper presents a computational and validation framework for evaluating entanglement-based modifications of spacetime geometry using observational constraints from weak-field and strong-field regimes.
+
+The framework includes a 13-stage validation pipeline (R1–R13p), numerical simulations of entanglement-driven spacetime dynamics, and phenomenological comparisons to observational summaries derived from Event Horizon Telescope and gravitational-wave measurements.
+
+**Read the paper:**
+[EDG Computational Framework Paper](docs/edg_comp_framework.pdf)
 
 ## Implementation of the Informational-Stress Equation
 
@@ -48,13 +61,23 @@ For transparency, defaults and overrides are documented directly in
 
 ## Significance
 
-EDG is the **first entanglement-based gravity theory** to progress from conceptual plausibility to **phenomenological support**:  
+This repository provides a **reproducible computational framework for exploring entanglement-based spacetime models**.
 
-- Recovers GR in tested Newtonian and post-Newtonian regimes.  
-- Extends to strong fields with falsifiable deviations tied to entanglement structure.  
-- Bridges **quantum information, black-hole thermodynamics, and cosmology** under a single, testable framework.  
+Key contributions include:
 
-In short: **EDG is no longer speculation — it is a data-driven, falsifiable path toward quantum gravity.**
+- A **13-stage validation pipeline (R1–R13p)** spanning Newtonian tests, post-Newtonian observables, and strong-field phenomenology.
+- A modular implementation linking **quantum information metrics (entropy, mutual information)** to discrete curvature and Einstein-like tensor approximations.
+- Reproducible comparisons to observational summaries from **Event Horizon Telescope photon rings** and **gravitational-wave inspiral phasing**.
+
+The goal is not to assert a definitive theory of quantum gravity, but to provide a **testable computational framework** in which entanglement-based spacetime models can be quantitatively evaluated.
+
+## Validation Pipeline
+
+The EDG validation framework consists of a multi-stage pipeline:
+
+R1–R6   Newtonian consistency checks  
+R7–R12  Post-Newtonian observables and PPN comparisons  
+R13p    Strong-field observational constraints  
 
 
 ## Release v1.0.0
@@ -64,11 +87,11 @@ This release includes:
   - Joint strong-field constraints from **EHT ring-size shifts** and **gravitational-wave phasing**, yielding:
 
     - **Strong-field constraint:**
-       - ![Lq constraint](docs/figs/Lq_constraint.svg)
+      ![Lq constraint](docs/figs/Lq_constraint.svg)
     - **Model comparison:**
-       - ![Model comparison](docs/figs/model_comparison.svg)
+      ![Model comparison](docs/figs/model_comparison.svg)
     - **Information-theoretic distance:**
-       - ![Mutual information distance](docs/figs/mutual_info_distance.svg)
+      ![Mutual information distance](docs/figs/mutual_info_distance.svg)
     
 ## Core idea:
 - Define an information-theoretic distance between lattice sites,
@@ -81,11 +104,23 @@ The code supports:
 - Multi-GPU parallelization on Linux using Dask-CUDA.
 - CPU-only mode on both platforms.
 
-## For methodology and results, see:
+## Research Papers and Technical Background
 
-1. [Entanglement-Driven Gravity: From Emergent Spacetime to Strong-Field Evidence Beyond GR](docs/edg-emergent_spacetime-v1.0.0.pdf)
-2. [Entanglement-Driven Gravity: Emergent Spacetime from Quantum Correlations and Empirical Constraints](docs/edg-emergent_spacetime.pdf)
-3. [Entanglement-Driven Emergent Spacetime with Time-Evolved Tensor Networks: Applications to Quantum and Classical Systems](docs/entanglement-drive-spacetime.pdf)
+The current computational validation framework and methodology are described in the primary paper:
+
+1. **Primary framework paper**
+   - [A Reproducible Computational Framework for Entanglement-Driven Gravity (EDG)](docs/edg_comp_framework.pdf)
+
+Earlier technical notes and exploratory manuscripts that motivated the framework are also included for reference:
+
+2. **Conceptual development**
+   - [Entanglement-Driven Gravity: From Emergent Spacetime to Strong-Field Evidence Beyond GR](docs/edg-emergent_spacetime-v1.0.0.pdf)
+
+3. **Information-theoretic formulation**
+   - [Entanglement-Driven Gravity: Emergent Spacetime from Quantum Correlations and Empirical Constraints](docs/edg-emergent_spacetime.pdf)
+
+4. **Tensor-network simulation foundations**
+   - [Entanglement-Driven Emergent Spacetime with Time-Evolved Tensor Networks: Applications to Quantum and Classical Systems](docs/entanglement-drive-spacetime.pdf)
 
 
 ## EDG Validation Pipeline (R1-R13p)
@@ -296,20 +331,37 @@ cp spacetime_outputs/black_hole_entanglement_2d.gif example_outputs/
 
 ## Citation
 
-If you use this code in your research, please cite at least one of the following:  
- 
- 1. Entanglement-Driven Gravity (EDG): From Emergent Spacetime to Strong-Field Evidence Beyond GR
-    Kenneth G. Young II, PhD, "Entanglement-Driven Gravity (EDG): From Emergent Spacetime to Strong-Field Evidence Beyond GR" 2025.
-    [Entanglement-Driven Gravity (EDG): From Emergent Spacetime to Strong-Field Evidence Beyond GR](docs/edg-emergent_spacetime-v1.0.0.pdf)   
- 2. Entanglement-Driven Gravity (EDG) paper
-    Kenneth G. Young II, PhD, "Entanglement-Driven Gravity: Emergent Spacetime from Quantum Correlations and Empirical Constraints" 2025.
-    [Entanglement-Driven Gravity: Emergent Spacetime from Quantum Correlations and Empirical Constraints](docs/edg-emergent_spacetime.pdf)   
- 3. Tensor-network paper (framework foundations)
-    Kenneth Young, PhD, "Entanglement-Driven Emergent Spacetime with Time-Evolved Tensor Networks: Applications to Quantum and Classical Systems" 2025.
-    [Entanglement-Driven Emergent Spacetime with Time-Evolved Tensor Networks: Applications to Quantum and Classical Systems](docs/entanglement-drive-spacetime.pdf)
- 4. Software / repository
-    Kenneth G. Young II, PhD, "EntanglementSpacetime: EDG Validation Pipeline and Analysis Code," GitHub, 2025.
-    URL: https://github.com/keninayoung/EntanglementSpacetime
+If you use this repository or its validation framework in academic work, please cite the primary framework paper and/or the software repository.
+
+### Primary paper
+
+Young, K. G. II (2026).  
+**A Reproducible Computational Framework for Testing Entanglement-Based Modifications of Spacetime Geometry.**  
+Preprint.  
+[docs/edg_comp_framework.pdf](docs/edg_comp_framework.pdf)
+
+### Software / repository
+
+Young, K. G. II (2025).  
+**EntanglementSpacetime: EDG Validation Pipeline and Analysis Code.**  
+GitHub repository.  
+https://github.com/keninayoung/EntanglementSpacetime
+
+### Earlier technical papers
+
+The following manuscripts document earlier conceptual and simulation stages of the project:
+
+1. **Entanglement-Driven Gravity (EDG): From Emergent Spacetime to Strong-Field Evidence Beyond GR**  
+   Kenneth G. Young II, PhD (2025)  
+   [docs/edg-emergent_spacetime-v1.0.0.pdf](docs/edg-emergent_spacetime-v1.0.0.pdf)
+
+2. **Entanglement-Driven Gravity: Emergent Spacetime from Quantum Correlations and Empirical Constraints**  
+   Kenneth G. Young II, PhD (2025)  
+   [docs/edg-emergent_spacetime.pdf](docs/edg-emergent_spacetime.pdf)
+
+3. **Entanglement-Driven Emergent Spacetime with Time-Evolved Tensor Networks: Applications to Quantum and Classical Systems**  
+   Kenneth Young, PhD (2025)  
+   [docs/entanglement-drive-spacetime.pdf](docs/entanglement-drive-spacetime.pdf)
 
 ## License
 
@@ -338,6 +390,7 @@ SOFTWARE.
 ## Contact
 
 Open an issue or reach out directly to the author.
+
 
 
 
