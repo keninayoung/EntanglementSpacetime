@@ -1,4 +1,6 @@
 # Entanglement Spacetime:  A Computational Framework for Testing Emergent Gravity
+Reference implementation of the EDG validation pipeline (R1–R13p)
+described in the computational framework paper.
 
 Author: Kenneth Young, PhD
 
@@ -390,6 +392,7 @@ SOFTWARE.
 ## Contact
 
 Open an issue or reach out directly to the author.
+
 
 
 
